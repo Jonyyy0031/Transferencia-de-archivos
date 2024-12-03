@@ -1,0 +1,86 @@
+﻿<Window x:Class="FileTransfer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="File Transfer" Height="700" Width="1000"
+        WindowStartupLocation="CenterScreen"
+        Background="#F0F0F0">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <StackPanel Grid.Row="0" Margin="0,0,0,20">
+            <TextBlock Text="File Transfer" 
+                      FontSize="28" 
+                      FontWeight="Bold"
+                      Margin="0,0,0,15"/>
+            <Button Content="Iniciar Transferencia" 
+                    Height="45"
+                    Width="200"
+                    Background="#2196F3"
+                    Foreground="White"
+                    Click="StartTransfer_Click">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+        </StackPanel>
+
+        <!-- Main Content -->
+        <TabControl Grid.Row="1">
+            <!-- Active Transfers Tab -->
+            <TabItem Header="Transferencias Activas">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <ScrollViewer Grid.Row="0" Margin="0,0,0,20">
+                        <StackPanel x:Name="ProgressPanel"/>
+                    </ScrollViewer>
+
+                    <Border Grid.Row="1" 
+                            BorderThickness="1"
+                            BorderBrush="#DDDDDD"
+                            Background="White"
+                            CornerRadius="5">
+                        <ListBox x:Name="LogBox" 
+                                Height="200"
+                                Background="Transparent"
+                                BorderThickness="0"/>
+                    </Border>
+                </Grid>
+            </TabItem>
+
+            <!-- History Tab -->
+            <TabItem Header="Historial de Archivos">
+                <ListView x:Name="HistoryList">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Nombre" 
+                          DisplayMemberBinding="{Binding Nombre}" 
+                          Width="200"/>
+                            <GridViewColumn Header="Tamaño" 
+                          DisplayMemberBinding="{Binding Tamaño}" 
+                          Width="100"/>
+                            <GridViewColumn Header="Fecha" 
+                          DisplayMemberBinding="{Binding Fecha}" 
+                          Width="150"/>
+                            <GridViewColumn Header="Origen" 
+                          DisplayMemberBinding="{Binding Origen}" 
+                          Width="150"/>
+                            <GridViewColumn Header="Estado" 
+                          DisplayMemberBinding="{Binding Estado}" 
+                          Width="100"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
